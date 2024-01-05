@@ -1,0 +1,24 @@
+#!/bin/bash
+
+os_type="$OSTYPE"
+
+case "$os_type" in
+    linux-gnu*) 
+        #echo "Detected OS: Linux"
+        # Run traceroute command for Linux
+        traceroute -w 1  $1
+        ;;
+    darwin*) 
+        #echo "Detected OS: macOS"
+        # Run traceroute command for macOS
+        traceroute -w 1 $1
+        ;;
+    cygwin* | msys* | win32*) 
+        #echo "Detected OS: Windows (Cygwin/MSYS)"
+        # Run traceroute command for Windows (Cygwin/MSYS)
+        tracert $1
+        ;;
+    *)
+        echo "Unknown OS: $os_type"
+        ;;
+esac
