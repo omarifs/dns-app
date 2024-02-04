@@ -87,10 +87,14 @@ if($aksi=='whois'){
     $output = shell_exec("dig -4 +short -x $(dig -4 +short $data A @$ns)");
   if($output=='')
     $output = shell_exec("dig -4 +short -x $(dig -4 +short @ns1.domainesia.net $data A)");
+  if($output=='')
+    $output = shell_exec("dig -4 +short -x $(dig -4 +short @ns1.domainesia.net $data TXT | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)");
   echo $output;
 }else if($aksi=='host'){
   $data = aman($_POST['param'] ?? '') ;
   $output = shell_exec("dig -4 +short -x $(dig -4 +short @ns1.domainesia.net $data A)");
+  if($output=='')
+    $output = shell_exec("dig -4 +short -x $(dig -4 +short @ns1.domainesia.net $data TXT | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)");
   echo $output;
 }else if($aksi=='cekssl'){
   $data = str_replace("'","",aman($_POST['param'] ?? '')) ;
