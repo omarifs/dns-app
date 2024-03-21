@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']!="https://app.solveit.my.id/" && $_SERVER['HTTP_REFERER']!="https://app.solveit.my.id/macros.php") header('location:https://app.solveit.my.id');
 //echo $_SERVER['HTTP_USER_AGENT'];
 header("Access-Control-Allow-Origin: *");
@@ -49,17 +50,12 @@ $aksi= $_POST['aksi'] ?? '';
 if($aksi=='whois'){
   $data = aman($_POST['param'] ?? '') ;
   //$data = getMainDomain($data);
-  if(filter_var(str_replace("'","",$data), FILTER_VALIDATE_IP))
+  $patterns = array("/'/", "/www\./", "/\//");
+  $data=preg_replace($patterns, '' ,$data);
+  if(filter_var($data, FILTER_VALIDATE_IP))
   	$output = shell_exec("whois $data");
   else{
-	if(strstr($data,'.it'))
-	   $output = shell_exec("whois -I $data --no-recursion");
-  	else
- 	   $output = shell_exec("whois -I $data | grep 'Domain Name\|Updated On\|Date\|Status\|Name Server\|DNSSEC\|Registrar URL\|Registrar WHOIS'");
-    if($output==''){
-      //$output = shell_exec("whois $data --no-recursion");
-      $output = shell_exec("whois $data | grep 'Domain Name\|Updated On\|Date\|Status\|Name Server\|DNSSEC\|Registrar URL\|Registrar WHOIS'");
-   }
+	  $output = whois($data);
   }
   //$output=$data;
   echo "<pre>".str_replace('   ','',$output)."</pre>";
@@ -378,19 +374,29 @@ function parseURL($url){
     return $url;
   }
 }
-function getMainDomain($domain) {
-  $domainParts = explode('.', $domain);
+function whois($domain) {
+  $subdomains = explode('.', $domain); // Membagi domain menjadi bagian-bagian subdomain
+    $subdomain_count = count($subdomains); // Menghitung jumlah subdomain
 
-  // Jika domain memiliki lebih dari dua bagian, itu adalah subdomain
-  if (count($domainParts) > 1) {
-    // Menghapus subdomain pertama dari array domainParts
-    array_shift($domainParts);
-    // Menggabungkan domain bagian terakhir dan sebelum terakhir
-    $mainDomain = implode('.', array_slice($domainParts, -2));
-    return $mainDomain;
-  }
-
-  // Jika domain adalah domain utama, kembalikan teks asli
-  return $domain;
+    // Loop untuk menghapus subdomain dari paling depan dan melakukan pemeriksaan WHOIS
+    for ($i = 0; $i < $subdomain_count; $i++) {
+        $subdomain = implode('.', $subdomains); // Menggabungkan subdomain kembali ke dalam string
+        $whois_result = shell_exec("whois -I " . $subdomain . " --no-recursion"); // Menjalankan perintah WHOIS pada subdomain
+                
+        if(strstr($whois_result , 'Sorry we do not own this TLD or SLD') || strstr($whois_result , 'No match'))
+          array_shift($subdomains); // Menghapus subdomain dari paling depan
+        else{
+          if(strstr($subdomain,'.it'))
+              $output = shell_exec("whois -I $subdomain --no-recursion");
+         	else
+              $output = shell_exec("whois -I $subdomain | grep 'Domain Name\|Updated On\|Date\|Status\|Name Server\|DNSSEC\|Registrar URL\|Registrar WHOIS\|Registrar:'");
+          if($output==''){
+              //$output = shell_exec("whois $data --no-recursion");
+              $output = shell_exec("whois $subdomain | grep 'Domain Name\|Updated On\|Date\|Status\|Name Server\|DNSSEC\|Registrar URL\|Registrar WHOIS'");
+          }
+          return $output;
+          exit;
+        }
+    }
 }
 ?>
