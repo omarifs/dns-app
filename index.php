@@ -26,7 +26,7 @@ if (strpos($userAgent, 'curl') !== false) {
     exit(0);
     // Tambahkan logika atau skrip PHP lainnya di sini
 }
-$ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90'];
+$ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.136'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
