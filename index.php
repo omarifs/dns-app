@@ -95,7 +95,7 @@ $ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.13
                                       <a onclick="run('product')" style="z-index: 9999;padding: 10px 0;">Domainesia Find</a>   
                                       <select class="gol"><option value="services">Service Hostname</option><option value="username">Username</option><option value="domains">Domain</option><option value="invoice">Invoice</option><option value="ip">IP</option><option value="email">Email</option><option value="tiketid">TIket By ID</option><option value="tiketsub">Tiket By Subject</option></select>
                                       </button>
-                                      <a class="btn btn-default btn-sm" id="whois" type="button" href="https://app.solveit.my.id/macros" target="_blank">Canned Response</a> 
+                                      <a class="btn btn-default btn-sm" id="whois" type="button" href="https://my.domainesia.com/control/api/chatwoot/canned.php" target="_blank">Canned Response</a> 
                                       <?php if(getIPAddress()=='103.147.154.56'): ?> 
                                       <!--<button class="btn btn-success btn-sm" id="cekakun" type="button" onclick="run('cekakun')">Query Akun Utama</button>-->
 									  <?php endif; endif; ?>
