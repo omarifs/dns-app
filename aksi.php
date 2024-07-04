@@ -42,7 +42,7 @@ $dns=[
   //"Surakarta (ID)"=>"103.226.174.100",
   //"Sukoharjo (ID)"=>"103.28.114.126"
 ];
-$ns='8.8.8.8';
+$ns='9.9.9.9';
 function aman($args){
   return escapeshellarg(trim($args));
 }
