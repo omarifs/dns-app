@@ -8,6 +8,7 @@ $dns=[
   "Domainesia NS1"=>"ns1.domainesia.net",
   "Domainesia DNS1"=>"dns1.domainesia.com",
   "Domainesia NSX1"=>"nsx1.domainesia.com",
+  "Domainesia DNSX1"=>"dnsx1.domainesia.com",
   "Cloudflare"=>"1.1.1.1",
   "Google"=>"8.8.8.8",
   "Quad9"=>"9.9.9.9",
@@ -42,7 +43,7 @@ $dns=[
   //"Surakarta (ID)"=>"103.226.174.100",
   //"Sukoharjo (ID)"=>"103.28.114.126"
 ];
-$ns='9.9.9.9';
+$ns='149.112.112.112';
 function aman($args){
   return escapeshellarg(trim($args));
 }
