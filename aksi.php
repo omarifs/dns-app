@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']!="https://app.solveit.my.id/" && $_SERVER['HTTP_REFERER']!="https://app.solveit.my.id/macros.php") header('location:https://app.solveit.my.id');
+//if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER']!="https://tools.websolusi.com")  header('location:https://tools.websolusi.com');
 //echo $_SERVER['HTTP_USER_AGENT'];
 header("Access-Control-Allow-Origin: *");
 //header("Content-Security-Policy: default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'");
