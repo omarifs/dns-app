@@ -35,7 +35,7 @@ $ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.13
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Solve IT - Online Tools</title>
+        <title>Websolusi - Online Tools</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -58,7 +58,7 @@ $ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.13
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="#!">Solve It - Domains/IP Online Tools</a>
+                <a class="navbar-brand" href="#!">Websolusi - Domains/IP Online Tools</a>
             </div>
         </nav>
         <!-- Masthead-->
@@ -210,7 +210,7 @@ $ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.13
           			  	$('#response').html(data);
           			  },
                   beforeSend: function(){
-                    $('#response').html('Loading.......');
+                    $('#response').html('Loading '+aksi+'.......');
                   },
           			  error:function(XMLHttpRequest){
           				  console.log(XMLHttpRequest.responseText);
