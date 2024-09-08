@@ -83,7 +83,7 @@ $ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.13
                                       <!--<button class="btn btn-warning btn-sm" id="dnscek" type="button" onclick="run('dnscek')">DNS Checker</button>
                                       <button class="btn bg-secondary btn-sm" id="intodns" type="button" onclick="run('intodns')">Into DNS</button>-->
                                       <button class="btn btn-warning btn-sm" id="propagate" type="button" onclick="run('propagate')">
-                                      <select class="tipe"><option value="A">A</option><option value="AAAA">AAAA</option><option value="MX">MX</option><option value="CNAME">CNAME</option><option value="TXT">TXT</option><option value="NS">NS</option><option value="CAA">CAA</option></select>
+                                      <select class="tipe"><option value="A">A</option><option value="AAAA">AAAA</option><option value="MX">MX</option><option value="CNAME">CNAME</option><option value="TXT">TXT</option><option value="NS">NS</option><option value="CAA">CAA</option><option value="SRV">SRV</option></select>
                                       DNS Propagation</button>
                                       <button class="btn btn-success btn-sm" id="traceroute" type="button">
                                       <a onclick="run('traceroute')" style="z-index: 9999;padding: 10px 0;">Network Test</a>   
