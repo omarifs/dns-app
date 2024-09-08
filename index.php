@@ -17,7 +17,7 @@ function getIPAddress() {
      }  
 
      // Mengambil data dari API ipinfo.io
-    $response = file_get_contents("http://ip-api.com/json/$ip?fields=countryCode,city,isp,reverse");
+    $response = @file_get_contents("http://ip-api.com/json/$ip?fields=countryCode,city,isp,reverse" ,false,  stream_context_create(['http' => ['timeout' => 3 ]]));
 
     // Memeriksa apakah data berhasil diambil
     if ($response === FALSE) {
