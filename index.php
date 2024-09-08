@@ -15,7 +15,27 @@ function getIPAddress() {
     else{  
              $ip = $_SERVER['REMOTE_ADDR'];  
      }  
-     return $ip;  
+
+     // Mengambil data dari API ipinfo.io
+    $response = file_get_contents("http://ip-api.com/json/$ip?fields=countryCode,city,isp,reverse");
+
+    // Memeriksa apakah data berhasil diambil
+    if ($response === FALSE) {
+        die('Error occurred while fetching data from API.');
+    }
+
+    // Mengubah response JSON menjadi array PHP
+    $data = json_decode($response, true);
+
+    // Mengambil data negara dan kota
+    $country = isset($data['countryCode']) ? $data['countryCode'] : '-';
+    $city = isset($data['city']) ? $data['city'] : '-';
+    $isp = isset($data['isp']) ? $data['isp'] : '-';
+    $hostname = isset($data['reverse']) ? $data['reverse'] : '-';
+
+
+
+     return "IP ku \t: $ip \nLokasi \t: $city ($country) \nISP \t: $isp \nHostname: $hostname";  
 }
 
 $userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -123,7 +143,7 @@ $ipwhitelist=['103.147.154.56','103.147.154.58','103.126.226.90','172.105.125.13
                             <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
                             <li class="list-inline-item">⋅</li>
                             <li class="list-inline-item"><a href="#!">Privacy Policy</a></li> -->
-                          IP ku : <?php echo getIPAddress() ?>			
+                          <?php echo nl2br(getIPAddress()) ?>			
                         </ul>
                         <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2022. All Rights Reserved.</p>
                     </div>
