@@ -384,4 +384,41 @@ function whois($domain) {
         }
     }
 }
+function getIPAddress() {  
+  //whether ip is from the share internet  
+   if(!empty($_SERVER['HTTP_CLIENT_IP'])) {  
+              $ip = $_SERVER['HTTP_CLIENT_IP'];  
+      }  
+  //whether ip is from the proxy  
+  elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {  
+              $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];  
+   }  
+//whether ip is from the remote address  
+  else{  
+           $ip = $_SERVER['REMOTE_ADDR'];  
+   }  
+  return $ip;
+}
+function ipinfo(){
+  $ip=getIPAddress();
+  // Mengambil data dari API ipinfo.io
+  $response = @file_get_contents("http://ip-api.com/json/$ip?fields=countryCode,city,isp,reverse" ,false,  stream_context_create(['http' => ['timeout' => 3 ]]));
+
+  // Memeriksa apakah data berhasil diambil
+  if ($response === FALSE) {
+      die('Error occurred while fetching data from API.');
+  }
+
+  // Mengubah response JSON menjadi array PHP
+  $data = json_decode($response, true);
+
+  // Mengambil data negara dan kota
+  $country = isset($data['countryCode']) ? $data['countryCode'] : '-';
+  $city = isset($data['city']) ? $data['city'] : '-';
+  $isp = isset($data['isp']) ? $data['isp'] : '-';
+  $hostname = isset($data['reverse']) ? $data['reverse'] : '-';
+
+  return "IP ku \t: $ip \nLokasi \t: $city ($country) \nISP \t: $isp \nHostname: $hostname";
+
+}
 ?>
